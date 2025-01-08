@@ -1,4 +1,39 @@
-// Set up the y scale for both y1 and y2
+// script.js
+document.addEventListener("DOMContentLoaded", function() {
+    // Set the dimensions of the graph
+    const width = 800;
+    const height = 500;
+
+    // Create the SVG container for the chart
+    const svg = d3.select("#chart")
+        .attr("width", width)
+        .attr("height", height);
+
+    // Define margins for the plot area
+    const margin = { top: 20, right: 30, bottom: 40, left: 40 };
+    const plotWidth = width - margin.left - margin.right;
+    const plotHeight = height - margin.top - margin.bottom;
+
+    // Create a group for the chart area
+    const chartGroup = svg.append("g")
+        .attr("transform", `translate(${margin.left},${margin.top})`);
+
+    // Load the CSV data from GitHub (replace with your CSV URL)
+    d3.csv("https://raw.githubusercontent.com/yourusername/your-repository-name/main/data.csv").then(function(data) {
+        // Parse x-values as dates and convert y1 and y2 values to numbers
+        const parseDate = d3.timeParse("%Y-%m-%d");  // Change this format as needed
+        data.forEach(d => {
+            d.x = parseDate(d.x);  // Parse the x value as a date
+            d.y1 = +d.y1;
+            d.y2 = +d.y2;
+        });
+
+        // Set up the x scale (time scale)
+        const xScale = d3.scaleTime()
+            .domain([d3.min(data, d => d.x), d3.max(data, d => d.x)])  // Set domain based on the min and max of the dates
+            .range([0, plotWidth]);
+
+        // Set up the y scale for both y1 and y2
         const yScale = d3.scaleLinear()
             .domain([0, Math.max(d3.max(data, d => d.y1), d3.max(data, d => d.y2))])
             .range([plotHeight, 0]);
