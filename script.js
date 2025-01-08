@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function() {
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
     // Load the CSV data
-    d3.csv("https://github.com/joy-ald/DailyPlot/edit/main/DailyValue.csv").then(function(data) {
+    d3.csv("https://raw.githubusercontent.com/joy-ald/DailyPlot/refs/heads/main/DailyValue.csv").then(function(data) {
         // Convert x and y values to numbers
         data.forEach(d => {
             d.x = +d.x;
