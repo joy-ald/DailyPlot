@@ -1,5 +1,5 @@
 // URL to the raw CSV file hosted on GitHub
-const csvUrl = 'https://raw.githubusercontent.com/yourusername/your-repository/main/data.csv';
+const csvUrl = 'https://raw.githubusercontent.com/joy-ald/DailyPlot/refs/heads/main/DailyValue.csv';
 
 // Fetch the CSV file from GitHub
 fetch(csvUrl)
