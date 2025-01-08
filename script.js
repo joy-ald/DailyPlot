@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function() {
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
     // Load the CSV data
-    d3.csv("data.csv").then(function(data) {
+    d3.csv("DailyValue.csv").then(function(data) {
         // Convert x and y values to numbers
         data.forEach(d => {
             d.x = +d.x;
