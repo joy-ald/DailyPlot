@@ -62,4 +62,31 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // Add data points for y2 as squares
         chartGroup.selectAll(".square-y2")
-           
+            .data(data)
+            .enter()
+            .append("rect")
+            .attr("x", d => xScale(d.x) - 3)
+            .attr("y", d => yScale(d.y2) - 3)
+            .attr("width", 6)
+            .attr("height", 6)
+            .attr("fill", "orange")
+            .attr("class", "square-y2");
+
+        // Add labels to the axes
+        chartGroup.append("text")
+            .attr("x", plotWidth / 2)
+            .attr("y", plotHeight + margin.bottom - 5)
+            .style("text-anchor", "middle")
+            .text("X Value");
+
+        chartGroup.append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("x", -plotHeight / 2)
+            .attr("y", -margin.left + 10)
+            .style("text-anchor", "middle")
+            .text("Y Value");
+
+    }).catch(function(error) {
+        console.log("Error loading the CSV file: " + error);
+    });
+});
