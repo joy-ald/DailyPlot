@@ -19,18 +19,20 @@ document.addEventListener("DOMContentLoaded", function() {
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
     // Load the CSV data from GitHub (replace with your CSV URL)
-    d3.csv("https://raw.githubusercontent.com/joy-ald/DailyPlot/refs/heads/main/DailyValue.csv").then(function(data) {
-        // Convert x, y1, and y2 values to numbers
+    d3.csv("https://raw.githubusercontent.com/yourusername/your-repository-name/main/data.csv").then(function(data) {
+        // Parse x-values as dates and convert y1 and y2 values to numbers
+        const parseDate = d3.timeParse("%Y-%m-%d");  // Change this format as needed
         data.forEach(d => {
-            d.x = +d.x;
+            d.x = parseDate(d.x);  // Parse the x value as a date
             d.y1 = +d.y1;
             d.y2 = +d.y2;
         });
 
-        // Set up the x scale (same for both y1 and y2)
-        const xScale = d3.scaleLinear()
-            .domain([0, d3.max(data, d => d.x)])
+        // Set up the x scale (time scale)
+        const xScale = d3.scaleTime()
+            .domain([d3.min(data, d => d.x), d3.max(data, d => d.x)])  // Set domain based on the min and max of the dates
             .range([0, plotWidth]);
+
 
         // Set up the y scale for both y1 and y2
         const yScale = d3.scaleLinear()
