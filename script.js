@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function() {
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
     // Load the CSV data from GitHub (replace with your CSV URL)
-    d3.csv("https://raw.githubusercontent.com/yourusername/your-repository-name/main/data.csv").then(function(data) {
+    d3.csv("https://raw.githubusercontent.com/joy-ald/DailyPlot/refs/heads/main/DailyValue.csv").then(function(data) {
         // Parse x-values as dates and convert y1 and y2 values to numbers
         const parseDate = d3.timeParse("%Y-%m-%d");  // Change this format as needed
         data.forEach(d => {
